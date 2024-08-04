@@ -7,6 +7,8 @@ import connectDB from "./src/config/db.js";
 import { setupSocket } from "./src/config/socket.js";
 import authRoutes from "./src/routes/authRoute.js";
 
+
+import profileRoute from "./src/routes/profileRoute.js";
 dotenv.config();
 connectDB();
 
@@ -15,7 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
-
+app.use('/api/profile',profileRoute);
 const server = http.createServer(app);
 const io = setupSocket(server);
 

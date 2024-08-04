@@ -14,6 +14,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  dob: {
+    type: String,
+  },
   profileImage: {
     type: String,
   },
@@ -28,5 +31,6 @@ const userSchema = new mongoose.Schema({
     type: String,
   },
 });
+
 const User = mongoose.model("User", userSchema);
 export default User;

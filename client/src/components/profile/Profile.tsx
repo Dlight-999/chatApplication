@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent, useEffect, FormEvent } from "react";
 import { assets } from "../../assets/assets";
 import axios from "axios";
-
+import {baseUrl}  from "../../config/constants";
 const Profile: React.FC = () => {
   const user = JSON.parse(localStorage.getItem("user") || "{}");
   const name = user.username;
@@ -16,12 +16,31 @@ const Profile: React.FC = () => {
   });
 
   useEffect(() => {
-    setFormData((prevData) => ({
-      ...prevData,
-      userName: name,
-      photoUrl: assets.profile,
-    }));
-  }, [name]);
+    const userProfile = async()=>{
+      try{
+        console.log(baseUrl);
+        const response = await axios.get(`${baseUrl}profile/getUser/${user._id}`);
+        const data = response.data.user;
+        console.log(data);
+        setFormData((prevData)=>  ({
+          ...prevData,
+          userName: data.username,
+          bio: data.bio,
+          dob: data.dob,
+          hobbies: data.hobbies,
+          photoUrl: data.profileImage ? `${baseUrl}profile/profileImage/${user._id}` : assets.profile,
+
+          
+        }));
+
+      }
+      catch(error){
+        console.log("Error fetching user profile:",error);
+      }
+    };
+    userProfile();
+
+  }, [user._id]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -52,17 +71,17 @@ const Profile: React.FC = () => {
     form.append("dob", formData.dob);
     form.append("hobbies", formData.hobbies);
 
-    // try {
-    //   await axios.post("/api/profile", form, {
-    //     headers: {
-    //       "Content-Type": "multipart/form-data",
-    //     },
-    //   });
-    //   alert("Profile updated successfully!");
-    // } catch (error) {
-    //   console.error("Error uploading file:", error);
-    //   alert("Failed to update profile.");
-    // }
+    try {
+      await axios.patch(`${baseUrl}profile/updateProfile/${user._id}`, form, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      alert("Profile updated successfully!");
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      alert("Failed to update profile.");
+    }
   };
 
   return (
