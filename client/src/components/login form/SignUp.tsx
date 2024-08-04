@@ -52,16 +52,14 @@ const SignUp: React.FC = () => {
     }
 
     try {
-      const resultAction = await dispatch(
+      await dispatch(
         signupUser({
           username: userData.firstName + " " + userData.lastName,
           email: userData.email,
           password: userData.password,
         })
-      );
-      if (signupUser.fulfilled.match(resultAction)) {
+      ).unwrap();
         navigate("/login");
-      }
     } catch (error) {
       console.error("Failed to sign up:", error);
     }
