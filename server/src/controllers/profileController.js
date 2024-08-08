@@ -28,6 +28,17 @@ export const getUserProfile = async(req, res)=>{
     }
 }
 
+export const getAllUser = async(req,res)=>{
+  try{
+    const users = await User.find();
+    return res.status(200).json({users: users});
+
+  }
+  catch(error){
+    return res.status(500).json({error:error.message});
+  }
+}
+
 export const getProfileImage = async(req, res)=>{
     try{
         const id = req.params.id;

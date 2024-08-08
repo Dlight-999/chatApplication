@@ -1,6 +1,6 @@
 import express from 'express';
 import multer from 'multer';
-import { getProfileImage, getUserProfile, updateProfile } from '../controllers/profileController.js';
+import { getAllUser, getProfileImage, getUserProfile, updateProfile } from '../controllers/profileController.js';
 
 const router = express.Router();
 const storgae = multer.diskStorage({
@@ -13,6 +13,7 @@ const storgae = multer.diskStorage({
 })
 const upload = multer({storage:storgae});
 router.get('/getUser/:id', getUserProfile);
+router.get('/getAllUser', getAllUser);
 router.patch('/updateProfile/:id',upload.single('photo'),updateProfile);
 router.get('/profileImage/:id', getProfileImage);
 export default router;
