@@ -25,7 +25,7 @@ function TopBar() {
 
   useEffect(() => {
     setProfileImage(user._id ? `${baseUrl}profile/profileImage/${user._id}` : assets.profile);
-  }, [user._id, baseUrl]);
+  }, [user._id]);
 
 
   return (
