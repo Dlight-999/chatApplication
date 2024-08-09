@@ -1,5 +1,5 @@
-import Message from "../models/messageModel";
-import Chat from "../models/chatModel";
+import Message from "../models/messageModel.js";
+import Chat from "../models/chatModel.js";
 
 export const sendMessage = async (req, res)=>{
     // const {chatId, content} = req.body;
@@ -28,3 +28,5 @@ export const getMessages = async(req,res) =>{
         res.status(500).json({message:error.message});
     };
 }
+
+export default {sendMessage, getMessages};

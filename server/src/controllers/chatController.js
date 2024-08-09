@@ -1,5 +1,5 @@
-import User from "../models/userModel";
-import Chat from "../models/chatModel";
+// import User from "../models/userModel.js";
+import Chat from "../models/chatModel.js";
 
 export const getChat = async(req, res)=>{
     const {userId} = req.body;
@@ -37,3 +37,5 @@ export const getChats = async(req, res)=>{
         res.status(500).json({message:error.message});
     }
 }
+
+export default {getChat, getChats};

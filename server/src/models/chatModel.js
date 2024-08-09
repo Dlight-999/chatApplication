@@ -5,7 +5,7 @@
 //group admin
 
 import mongoose from "mongoose";
-import User from "./userModel";
+import User from "./userModel.js";
 const chatSchema = new mongoose.Schema(
 
     {
@@ -34,5 +34,5 @@ const chatSchema = new mongoose.Schema(
     }
 )
 
-const Chat = mongoose.model("Chat",chatModel);
+const Chat = mongoose.model("Chat",chatSchema);
 export default Chat;

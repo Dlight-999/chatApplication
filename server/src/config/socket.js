@@ -1,6 +1,6 @@
 import { Server } from "socket.io";
-import Message from "../models/messageModel";
-import Chat from "../models/chatModel";
+import Message from "../models/messageModel.js";
+import Chat from "../models/chatModel.js";
 
 
 const socketConfig = (server) => {
